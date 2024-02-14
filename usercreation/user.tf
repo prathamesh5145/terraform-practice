@@ -26,3 +26,8 @@ resource "aws_iam_policy" "iam_s3_policy" {
     ]
   })
 }
+
+resource "aws_iam_user_policy_attachment" "attach_policy" {
+  user = aws_iam_user.new_user.name
+  policy_arn = aws_iam_policy.iam_s3_policy.arn
+}
