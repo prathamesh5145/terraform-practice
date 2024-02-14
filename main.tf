@@ -41,7 +41,7 @@ resource "aws_internet_gateway" "my_igw" {
 #creating route table
 resource "aws_route" "my_route" {
   route_table_id = aws_vpc.my_vpc.default_route_table_id
-  destination_cidr_block = ["0.0.0.0/0"]
+  destination_cidr_block = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.my_igw
 
 }
@@ -57,13 +57,13 @@ resource "aws_security_group" "my_security" {
     from_port = 22
     to_port = 22
   }  
-  ingress = {
+  ingress {
     cidr_blocks = ["0.0.0.0/0"]
     protocol = "TCP"
     from_port = 80
     to_port = 80
   }
-  egress = {
+  egress {
     cidr_blocks = "[0.0.0.0/0]"
     protocol = "-1"
     from_port = 0
