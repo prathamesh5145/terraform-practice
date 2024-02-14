@@ -1,15 +1,15 @@
 provider "aws" {
   region = "ap-south-1"
 }
-#creating user
+#creating bucket
 resource "aws_s3_bucket" "practice_bucket" {
   bucket = "lallya"
 }
-
+#creating user
 resource "aws_iam_user" "new_user" {
   name = "akshata"
 }
-
+#creating policy
 resource "aws_iam_policy" "iam_s3_policy" {
   name        = "specific-bucket-access-Policy"
   policy = jsonencode({
@@ -26,7 +26,7 @@ resource "aws_iam_policy" "iam_s3_policy" {
     ]
   })
 }
-
+#attached policy to user
 resource "aws_iam_user_policy_attachment" "attach_policy" {
   user = aws_iam_user.new_user.name
   policy_arn = aws_iam_policy.iam_s3_policy.arn
